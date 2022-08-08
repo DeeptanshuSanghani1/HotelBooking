@@ -77,5 +77,13 @@ namespace HotelBooking
             _room = roomSelect.SelectedItem as Room;
             await Navigation.PushAsync(new BookingForm(_room));
         }
+
+        public void OnImageTapped(object sender, EventArgs args)
+        {
+            Image imgSender = (Image)sender;
+
+            imgSender.AnchorX = 150;
+            imgSender.AnchorY = 150;
+        }
     }
 }
