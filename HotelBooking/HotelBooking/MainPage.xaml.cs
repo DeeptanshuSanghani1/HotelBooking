@@ -75,7 +75,7 @@ namespace HotelBooking
         private async void GoToBookingPage(object sender, EventArgs e)
         {
             _room = roomSelect.SelectedItem as Room;
-            //await Navigation.PushAsync(new BookingForm(_room));
+            await Navigation.PushAsync(new BookingForm(_room));
         }
     }
 }

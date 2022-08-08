@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="HotelBooking.BookingForm"
+             Title="Booking Form"
+             NavigationPage.HasBackButton="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEmail" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Padding="5" Orientation="Horizontal">
+                <Label Text="Room Selected:" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start"/>
+                <Label x:Name="roomlbl" FontSize="Medium"/>
+            </StackLayout>
+
+            <Grid Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Start Date: " TextColor="Black" Margin="0,11,0,0"/>
+                <DatePicker Grid.Row="0" Grid.Column="1" x:Name="StDate" HorizontalOptions="FillAndExpand" Format="d" DateSelected="OnDateSelected"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="End Date: " TextColor="Black" Margin="0,11,0,0"/>
+                <DatePicker Grid.Row="1" Grid.Column="1" x:Name="EndDate" HorizontalOptions="FillAndExpand" Format="d"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="First Name: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="2" Grid.Column="1" x:Name="FirstName" Placeholder="Enter your first name" PlaceholderColor="LightGray"
+                    HorizontalOptions="FillAndExpand" TextTransform="Uppercase" />
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Last Name: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="3" Grid.Column="1" x:Name="LastName" Placeholder="Enter your family name" PlaceholderColor="LightGray" 
+                       HorizontalOptions="FillAndExpand" TextTransform="Uppercase"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Text="Email: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="4" Grid.Column="1" x:Name="email" Placeholder="Enter your Email ID" PlaceholderColor="LightGray" 
+                       HorizontalOptions="FillAndExpand" Keyboard="Email">
+                    <Entry.Behaviors>
+                        <xct:EmailValidationBehavior DecorationFlags="Trim" InvalidStyle="{StaticResource InvalidEmail}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Grid.Row="5" Grid.Column="0" Text="Street Name: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="5" Grid.Column="1" x:Name="StreetName" Placeholder="Enter Street Address" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+
+                <Label Grid.Row="6" Grid.Column="0" Text="City: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="6" Grid.Column="1" x:Name="City" Placeholder="Enter City" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+
+                <Label Grid.Row="7" Grid.Column="0" Text="Province: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="7" Grid.Column="1" x:Name="Province" Placeholder="Enter Province" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+
+                <Label Grid.Row="8" Grid.Column="0" Text="Zip Code: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="8" Grid.Column="1" x:Name="Zip" Placeholder="Enter Zip Code" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+
+                <Label Grid.Row="9" Grid.Column="0" Text="Card No: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="9" Grid.Column="1" x:Name="CardNo" Placeholder="Enter Credit Card Number" MaxLength="16" 
+                       PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand" Keyboard="Numeric" Completed="OnCheckCard">
+                    <Entry.Behaviors>
+                        <xct:NumericValidationBehavior InvalidStyle="{StaticResource InvalidEntryStyle}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+                <Label Grid.Row="10" Grid.Column="0" Text="Expiry Date: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="10" Grid.Column="1" x:Name="ExpDate" Placeholder="MMYY" MaxLength="5" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+
+                <Label Grid.Row="11" Grid.Column="0" Text="CVV: " TextColor="Black" Margin="0,11,0,0"/>
+                <Entry Grid.Row="11" Grid.Column="1" x:Name="CVV" Placeholder="CVV" MaxLength="3" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+            </Grid>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5,0,0">
+                <Button x:Name="Confirm" Text="Confirm Booking" Clicked="SaveBooking"/>
+                <Button x:Name="Cancel" Text="Cancel Booking" Clicked="GoToMainPage"/>
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

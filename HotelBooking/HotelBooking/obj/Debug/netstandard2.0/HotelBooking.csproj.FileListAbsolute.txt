@@ -13,3 +13,4 @@ C:\Users\deept\Desktop\TeamProject\HotelBooking-1\HotelBooking\HotelBooking\bin\
 C:\Users\deept\Desktop\TeamProject\HotelBooking-1\HotelBooking\HotelBooking\bin\Debug\netstandard2.0\HotelBooking.pdb
 C:\Users\deept\Desktop\TeamProject\HotelBooking-1\HotelBooking\HotelBooking\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\deept\Desktop\TeamProject\HotelBooking-1\HotelBooking\HotelBooking\obj\Debug\netstandard2.0\ref\HotelBooking.dll
+C:\Users\deept\Desktop\TeamProject\HotelBooking-1\HotelBooking\HotelBooking\obj\Debug\netstandard2.0\BookingForm.xaml.g.cs

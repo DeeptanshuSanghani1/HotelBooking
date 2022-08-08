@@ -15,7 +15,7 @@
 
         <Label Text="Room Type" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,20,0,0"/>
         <Picker x:Name="roomSelect" Title="Select Room" ItemDisplayBinding="{Binding RoomType}" />
-        <Button Text="Book Now!" x:Name="btnBookClicked"/>
+        <Button Text="Book Now!" x:Name="btnBookClicked" Clicked="GoToBookingPage"/>
 
         <Label x:Name="Err" Text="" IsVisible="False" TextColor="Red" FontAttributes="Bold"/>
     </StackLayout>
