@@ -25,6 +25,10 @@ namespace HotelBooking
             StDate.MinimumDate = DateTime.Today;
         }
 
+        /*The Save Booking method will be invoked on click of Confirm Booking. 
+         *It will validate each field and add the data to the booking object. Once all fields are validated
+         *The dependency service will be called to write the data to a file. The data is converted to a Json object
+         *and written to a file. After the file writting is successful, the application navigates back to the Main Page.*/
         public async void SaveBooking(object sender, EventArgs args)
         {
             BookingData data = new BookingData();
@@ -127,6 +131,7 @@ namespace HotelBooking
             catch (Exception e) { Console.WriteLine(e); }
         }
 
+        //If the user clicks on the Cancel button, the system will go back to the Main Page without any booking.
         public async void GoToMainPage(object sender, EventArgs args)
         {
             await Navigation.PushAsync(new MainPage("BookingPage"));
@@ -136,11 +141,14 @@ namespace HotelBooking
         {
             EndDate.MinimumDate = StDate.Date;
         }
+
+        //Method to Validate Mandatory fields
         public bool ValidateData(string chkFld)
         {
             return String.IsNullOrEmpty(chkFld);
         }
 
+        //Method to validate the credit card number entered is 16 digits.
         public async void OnCheckCard(object sender, EventArgs args)
         {
             string cardnumber = sender as string;

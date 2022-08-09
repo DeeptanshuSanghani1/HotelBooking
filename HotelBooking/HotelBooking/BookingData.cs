@@ -6,6 +6,7 @@ namespace HotelBooking
 {
     public class BookingData
     {
+        //Method to store all Booking information into an object. The object is then written to a file when booking is confirmed
         private int _roomidBooked;
         private string _fromDate;
         private string _toDate;
@@ -52,6 +53,7 @@ namespace HotelBooking
 
         public double TotAmount { get { return _totAmount; } set { _totAmount = value; } }
 
+        //Constructor Class for Booking Data
         public BookingData() { }
 
         public BookingData(int roomIdBooked, string fromDate, string toDate, string fName, string lName, string email, string streetName, string city, string province, string zipCode, string creditcardno, string expdate, int cvv, double daysbooked, double totamount)

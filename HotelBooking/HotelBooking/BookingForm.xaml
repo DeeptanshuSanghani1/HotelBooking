@@ -14,7 +14,7 @@
             <Setter Property="TextColor" Value="Red"/>
         </Style>
     </ContentPage.Resources>
-
+<!-- Booking Form that will be invoked on click of a button from the Main Page -->
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <StackLayout Padding="5" Orientation="Horizontal">

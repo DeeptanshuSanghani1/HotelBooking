@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 [assembly: Xamarin.Forms.Dependency(typeof(FileService))]
 namespace HotelBooking.Droid
 {
+    /*File Service Method to read and write data from the Android File System */
     public class FileService : IFileService
     {
         public string GetRootPath()
