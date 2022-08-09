@@ -34,5 +34,42 @@ namespace HotelBooking.Droid
 
             return true;
         }
+
+        public bool CreateRoomFiles(Room roomData)
+        {
+            string destFileName = roomData.RoomType + ".txt";
+
+            string roomDestination = Path.Combine(GetRootPath(), destFileName);
+
+            string[] contentToWrite = { roomData.RoomId.ToString(), roomData.RoomType, roomData.Roomrate.ToString(), roomData.Vacant.ToString() };
+            File.WriteAllLines(roomDestination, contentToWrite);
+            return true;
+        }
+
+        public void LoadRoomData(List<Room> _iroomsList)
+        {
+            string dataPath = GetRootPath();
+
+            DirectoryInfo dInfo = new DirectoryInfo(dataPath);
+
+            FileInfo[] roomFiles = dInfo.GetFiles("*.txt");
+            
+            foreach(FileInfo roomFile in roomFiles)
+            {
+                if (roomFile.Name != "Booking.txt")
+                {
+                    StreamReader sr = new StreamReader(roomFile.FullName);
+
+                    _iroomsList.Add(new Room()
+                    {
+                        RoomId = Convert.ToInt32(sr.ReadLine()),
+                        RoomType = sr.ReadLine(),
+                        Roomrate = Convert.ToInt32(sr.ReadLine()),
+                        Vacant = Convert.ToInt32(sr.ReadLine()),
+                    });
+                }
+            }
+
+        }
     }
 }

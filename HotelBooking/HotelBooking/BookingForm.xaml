@@ -85,10 +85,20 @@
                 </Entry>
 
                 <Label Grid.Row="10" Grid.Column="0" Text="Expiry Date: " TextColor="Black" Margin="0,11,0,0"/>
-                <Entry Grid.Row="10" Grid.Column="1" x:Name="ExpDate" Placeholder="MMYY" MaxLength="5" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+                <Entry Grid.Row="10" Grid.Column="1" x:Name="ExpDate" Placeholder="MMYY" MaxLength="4" 
+                       PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand" Keyboard="Numeric">
+                    <Entry.Behaviors>
+                        <xct:NumericValidationBehavior InvalidStyle="{StaticResource InvalidEntryStyle}"/>
+                    </Entry.Behaviors>
+                </Entry>
 
                 <Label Grid.Row="11" Grid.Column="0" Text="CVV: " TextColor="Black" Margin="0,11,0,0"/>
-                <Entry Grid.Row="11" Grid.Column="1" x:Name="CVV" Placeholder="CVV" MaxLength="3" PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand"/>
+                <Entry Grid.Row="11" Grid.Column="1" x:Name="CVV" Placeholder="CVV" MaxLength="3" 
+                       PlaceholderColor="LightGray" HorizontalOptions="FillAndExpand" Keyboard="Numeric">
+                    <Entry.Behaviors>
+                        <xct:NumericValidationBehavior InvalidStyle="{StaticResource InvalidEntryStyle}"/>
+                    </Entry.Behaviors>
+                </Entry>
             </Grid>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5,0,0">

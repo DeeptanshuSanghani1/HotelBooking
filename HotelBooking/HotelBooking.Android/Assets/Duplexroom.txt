@@ -1,0 +1,4 @@
+6
+DuplexRoom
+200
+5

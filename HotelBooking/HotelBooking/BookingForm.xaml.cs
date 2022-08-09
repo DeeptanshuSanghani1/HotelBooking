@@ -1,10 +1,11 @@
 ﻿using HotelBooking.Interface;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,7 +21,7 @@ namespace HotelBooking
             b_room = roomselected;
 
             InitializeComponent();
-            roomlbl.Text = roomselected.RoomType;
+            roomlbl.Text = roomselected.RoomType + " (Available: " + roomselected.Vacant + ")";
             StDate.MinimumDate = DateTime.Today;
         }
 
@@ -111,12 +112,13 @@ namespace HotelBooking
                     data.DaysBooked = (EndDate.Date - StDate.Date).TotalDays;
 
                     data.TotAmount = data.DaysBooked * b_room.Roomrate;
+                    b_room.Vacant--;
 
-                    if (DependencyService.Get<IFileService>().CreateFile(data))
+                    if (DependencyService.Get<IFileService>().CreateFile(data) && DependencyService.Get<IFileService>().CreateRoomFiles(b_room))
                     {
                         await DisplayAlert("Booking Confirmation !!", "Total number of days booked: " + data.DaysBooked +
-                            "Total Amount that will be charged to your Credit Card: " + data.TotAmount, "Ok");
-                        await Navigation.PushAsync(new MainPage());
+                            " Total Amount that will be charged to your Credit Card: " + data.TotAmount, "Ok");
+                        await Navigation.PushAsync(new MainPage("BookingPage"));
                     }
                 }
                 else
@@ -125,14 +127,9 @@ namespace HotelBooking
             catch (Exception e) { Console.WriteLine(e); }
         }
 
-        public bool ValidateBooking()
-        {
-            return true;
-        }
-
         public async void GoToMainPage(object sender, EventArgs args)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new MainPage("BookingPage"));
         }
 
         private void OnDateSelected(object sender, EventArgs args)

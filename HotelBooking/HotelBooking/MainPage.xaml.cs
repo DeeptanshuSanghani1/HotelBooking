@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Essentials;
+using System.IO;
+using HotelBooking.Interface;
+
 
 namespace HotelBooking
 {
@@ -14,62 +18,45 @@ namespace HotelBooking
         List<Room> _roomsList = new List<Room>();
         Room _room;
 
-        public MainPage()
+        public MainPage(string frPage)
         {
             InitializeComponent();
-            CreateRooms();        //Method to add rooms to the List and update the picker with the available rooms
+            if (String.IsNullOrEmpty(frPage))
+            {
+                LoadRooms();            //Method to add rooms to the List and update the picker with the available rooms
+            }
+            else
+            {
+                DependencyService.Get<IFileService>().LoadRoomData(_roomsList);
+            }
+            roomSelect.ItemsSource = _roomsList;
         }
 
-        public void CreateRooms()
+        private async void LoadRooms()
         {
-            _roomsList.Clear();
+            string[] templateFileName = new string[] { "Singleroom.txt", "Doubleroom.txt", "Twinroom.txt","Tripleroom.txt","Quadroom.txt","Duplexroom.txt"};
 
-            _roomsList.Add(new Room
+            try
             {
-                RoomId = 1,
-                RoomType = "Single Room",
-                Roomrate = 65,
-                Vacant = 25
-            });
-
-            _roomsList.Add(new Room
-            {
-                RoomId = 2,
-                RoomType = "Double Room",
-                Roomrate = 95,
-                Vacant = 25
-            });
-
-            _roomsList.Add(new Room
-            {
-                RoomId = 3,
-                RoomType = "Twin Room",
-                Roomrate = 85,
-                Vacant = 10
-            });
-
-            _roomsList.Add(new Room
-            {
-                RoomId = 4,
-                RoomType = "Triple Room",
-                Roomrate = 125,
-                Vacant = 10
-            });
-            _roomsList.Add(new Room
-            {
-                RoomId = 5,
-                RoomType = "Quad Room",
-                Roomrate = 185,
-                Vacant = 5
-            });
-            _roomsList.Add(new Room
-            {
-                RoomId = 6,
-                RoomType = "Delux Room",
-                Roomrate = 200,
-                Vacant = 5
-            });
-            roomSelect.ItemsSource = _roomsList;
+                for(int i = 0; i < templateFileName.Count(); i++)
+                {
+                    using (var stream = await FileSystem.OpenAppPackageFileAsync(templateFileName[i]))
+                    {
+                        using (var rd = new StreamReader(stream))
+                        {
+                            _roomsList.Add(new Room
+                            {
+                                RoomId = Convert.ToInt32(rd.ReadLine()),
+                                RoomType = rd.ReadLine(),
+                                Roomrate = Convert.ToInt32(rd.ReadLine()),
+                                Vacant = Convert.ToInt32(rd.ReadLine())
+                            });
+                            DependencyService.Get<IFileService>().CreateRoomFiles(_roomsList[i]);
+                        }
+                    }
+                }
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
         private async void GoToBookingPage(object sender, EventArgs e)
